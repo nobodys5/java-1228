@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.practice.practiceweb.domain.practice.PracticeRepository">
+	  
+	  <insert id="save" parameterType="com.practice.practiceweb.domain.practice.Practice"
+	  useGeneratedKeys="true" keyProperty="practicecode">
+		  insert into
+		  		Practice_mst
+	  		values
+		  		(0,
+		  		#{title},
+		  		#{content},
+		  		#{usercode},
+		  		now(),
+		  		now()
+		  		)
+	  </insert>
+	  
+	  
+	  
+  </mapper>
