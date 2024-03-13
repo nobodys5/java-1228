@@ -18,4 +18,8 @@ public class PageController {
 	public String loadSignup() {
 		return "auth/signup";
 	}
+	@GetMapping("/mypage")
+	public String loadMypage() {
+		return "mypage";
+	}
 }
