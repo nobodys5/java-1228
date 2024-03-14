@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
-@Configuration
+@Configuration						//커스텀해주는것
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Bean
@@ -32,6 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.loginPage("/auth/signin") // 6) 로그인 페이지 get요청을 통해 접근
 		.loginProcessingUrl("/auth/signin") // 7) 로그인 요청(post)
 		.failureHandler(new AuthFailerHandler())
-		.defaultSuccessUrl("/index");
+		.defaultSuccessUrl("/index");//성공하면 메인페이지로 가라는코드
 	}
 }
