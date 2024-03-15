@@ -26,7 +26,9 @@ public class PrincipalDetailsService implements UserDetailsService {
 		
 		User userEntity = null;
 		try {
+			System.out.println(username);
 			userEntity = userRepository.findUserByUsername(username);
+			System.out.println("service: " +userEntity);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new UsernameNotFoundException(username);
@@ -36,11 +38,11 @@ public class PrincipalDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(username + "사용자 이름은 사용할 수 없습니다.");
 		}
 		
-		if(!username.equals("test")) {
-			System.out.println("test");
-			throw new UsernameNotFoundException(username + "사용자 이름은 사용할 수 없습니다."); 
-		}
-		System.out.println("hi");
+//		if(!username.equals("test")) {
+//			System.out.println("test");
+//			throw new UsernameNotFoundException(username + "사용자 이름은 사용할 수 없습니다."); 
+//		}
+//		System.out.println("hi");
 //		UserDetails userDetails = new UserDetails() {
 //			
 //			@Override

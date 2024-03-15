@@ -20,6 +20,9 @@ public class PrincipalDetails implements UserDetails {
 	private static final long serialVersionUID = -8490096719701750537L;
 	private User user;
 
+	public PrincipalDetails(User user) {
+		this.user = user;
+	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
@@ -42,13 +45,10 @@ public class PrincipalDetails implements UserDetails {
 		});
 		return grantedAuthorities;
 	}
-	public PrincipalDetails(User user) {
-		this.user = user;
-	}
 	
 	@Override
 	public String getPassword() {
-		return null;
+		return user.getUser_password();
 	}
 
 	@Override

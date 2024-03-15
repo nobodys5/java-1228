@@ -8,22 +8,22 @@
   <select id="findUserByUsername" parameterType="String" resultType="com.study.security20240312youngpil.domain.user.User">
 	  
 	  SELECT
-		um.user_code,
-		um.user_name,
-		um.user_email,
-		um.user_id,
-		um.user_password,
-		um.user_roles,
-		um.user_provider,
-		ud.user_profile_img,
-		ud.user_address,
-		ud.user_phone,
-		ud.user_gender
+			um.user_code,
+			um.user_name,
+			um.user_email,
+			um.user_id,
+			um.user_password,
+			um.user_roles,
+			um.user_provider,
+			ud.user_profile_img,
+			ud.user_address,
+			ud.user_phone,
+			ud.user_gender
 		FROM
-		user2_mst um
-		LEFT OUTER JOIN user_dtl ud ON(um.user_code = ud.user_code)
+			user2_mst um
+			LEFT OUTER JOIN user_dtl ud ON(um.user_code = ud.user_code)
 		WHERE
-		um.user_id = 'hong';
+			um.user_id = #{username};
   </select>
   
   <insert id="save" parameterType="com.study.security20240312youngpil.domain.user.User">
