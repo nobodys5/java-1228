@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.security20240312youngpil.handler.aop.annotation.Log;
+import com.study.security20240312youngpil.handler.aop.annotation.Timer;
+import com.study.security20240312youngpil.handler.exception.CustomValidationApiException;
 import com.study.security20240312youngpil.service.auth.AuthService;
 import com.study.security20240312youngpil.service.auth.PrincipalDetailsService;
 import com.study.security20240312youngpil.web.dto.CMRespDto;
+import com.study.security20240312youngpil.web.dto.SignupReqDto;
 import com.study.security20240312youngpil.web.dto.UsernameCheckReqDto;
 
 import lombok.RequiredArgsConstructor;
@@ -30,10 +34,31 @@ public class AuthController {
 	private final AuthService authService;
 	
 	@PostMapping("/signup")
-	public ResponseEntity<?> signup() {
-		return ResponseEntity.ok().body(principalDetailsService.addUser());
+	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult) {
+		Map<String, String> errorMessage = new HashMap<String, String>();
+		
+		if(bindingResult.hasErrors()) {
+			bindingResult.getFieldErrors().forEach(error -> {
+				System.err.println("오류발생 필드명:" + error.getField());
+				System.err.println("오류발생 상태메세지:" + error.getDefaultMessage());
+				errorMessage.put(error.getField(), error.getDefaultMessage());
+			});	
+			//return ResponseEntity.ok().body(new CMRespDto<>(-1,"유효성 검사 실패",errorMessage));
+			throw new CustomValidationApiException("유효성 검사 실패", errorMessage);
+		}
+		
+		boolean status = false;
+		try {
+			principalDetailsService.addUser(signupReqDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.ok().body(new CMRespDto<>(-1,"회원가입 실패",status));
+		}
+		
+		return ResponseEntity.ok().body(new CMRespDto<>(1,"회원가입 성공",status));
 	}
-	
+	@Log
+	@Timer
 	@GetMapping("/signup/validation/username")
 	public ResponseEntity<?> checkUsername(@Valid @RequestBody UsernameCheckReqDto usernameCheckReqDto,BindingResult bindingResult) {
 		Map<String, String> errorMessage = new HashMap<String, String>();

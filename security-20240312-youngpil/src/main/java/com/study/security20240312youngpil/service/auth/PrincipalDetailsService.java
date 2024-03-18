@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.security20240312youngpil.domain.user.User;
 import com.study.security20240312youngpil.domain.user.UserRepository;
+import com.study.security20240312youngpil.web.dto.SignupReqDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -92,20 +93,24 @@ public class PrincipalDetailsService implements UserDetailsService {
 		return new PrincipalDetails(userEntity);
 	}
 
-	public boolean addUser() {
-		User user = User.builder()
-					.user_name("홍길동")
-					.user_email("honghong@gmail.com")
-					.user_id("abcd")
-					.user_password(new BCryptPasswordEncoder().encode("1234"))
-					.user_roles("ROLE_USER, ROLE_MANAGER")
-					.build();
-		
-		try {
-			userRepository.save(user);
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
+//	public boolean addUser() {
+//		User user = User.builder()
+//					.user_name("홍길동")
+//					.user_email("honghong@gmail.com")
+//					.user_id("abcd")
+//					.user_password(new BCryptPasswordEncoder().encode("1234"))
+//					.user_roles("ROLE_USER, ROLE_MANAGER")
+//					.build();
+//		
+//		try {
+//			userRepository.save(user);
+//		} catch (Exception e) {
+//			return false;
+//		}
+//		return true;
+//	}
+	
+	public boolean addUser(SignupReqDto signupReqDto) throws Exception{
+		return userRepository.save(signupReqDto.toEntity()) > 0;
 	}
 }
