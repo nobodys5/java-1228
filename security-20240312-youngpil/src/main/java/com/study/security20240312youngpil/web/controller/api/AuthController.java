@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.security20240312youngpil.handler.aop.annotation.Log;
 import com.study.security20240312youngpil.handler.aop.annotation.Timer;
+import com.study.security20240312youngpil.handler.aop.annotation.ValidCheck;
 import com.study.security20240312youngpil.handler.exception.CustomValidationApiException;
 import com.study.security20240312youngpil.service.auth.AuthService;
 import com.study.security20240312youngpil.service.auth.PrincipalDetailsService;
@@ -33,19 +34,20 @@ public class AuthController {
 	private final PrincipalDetailsService principalDetailsService;
 	private final AuthService authService;
 	
+	@ValidCheck
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult) {
-		Map<String, String> errorMessage = new HashMap<String, String>();
 		
-		if(bindingResult.hasErrors()) {
-			bindingResult.getFieldErrors().forEach(error -> {
-				System.err.println("오류발생 필드명:" + error.getField());
-				System.err.println("오류발생 상태메세지:" + error.getDefaultMessage());
-				errorMessage.put(error.getField(), error.getDefaultMessage());
-			});	
-			//return ResponseEntity.ok().body(new CMRespDto<>(-1,"유효성 검사 실패",errorMessage));
-			throw new CustomValidationApiException("유효성 검사 실패", errorMessage);
-		}
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMessage = new HashMap<String, String>();
+//			bindingResult.getFieldErrors().forEach(error -> {
+//				System.err.println("오류발생 필드명:" + error.getField());
+//				System.err.println("오류발생 상태메세지:" + error.getDefaultMessage());
+//				errorMessage.put(error.getField(), error.getDefaultMessage());
+//			});	
+//			//return ResponseEntity.ok().body(new CMRespDto<>(-1,"유효성 검사 실패",errorMessage));
+//			throw new CustomValidationApiException("유효성 검사 실패", errorMessage);
+//		}
 		
 		boolean status = false;
 		try {
@@ -57,20 +59,21 @@ public class AuthController {
 		
 		return ResponseEntity.ok().body(new CMRespDto<>(1,"회원가입 성공",status));
 	}
+	@ValidCheck
 	@Log
 	@Timer
 	@GetMapping("/signup/validation/username")
 	public ResponseEntity<?> checkUsername(@Valid @RequestBody UsernameCheckReqDto usernameCheckReqDto,BindingResult bindingResult) {
 		Map<String, String> errorMessage = new HashMap<String, String>();
 		
-		if(bindingResult.hasErrors()) {
-			bindingResult.getFieldErrors().forEach(error -> {
-				System.err.println("오류발생 필드명:" + error.getField());
-				System.err.println("오류발생 상태메세지:" + error.getDefaultMessage());
-				errorMessage.put(error.getField(), error.getDefaultMessage());
-			});	
-			return ResponseEntity.ok().body(new CMRespDto<>(-1,"유효성 검사 실패",errorMessage));
-		}
+//		if(bindingResult.hasErrors()) {
+//			bindingResult.getFieldErrors().forEach(error -> {
+//				System.err.println("오류발생 필드명:" + error.getField());
+//				System.err.println("오류발생 상태메세지:" + error.getDefaultMessage());
+//				errorMessage.put(error.getField(), error.getDefaultMessage());
+//			});	
+//			return ResponseEntity.ok().body(new CMRespDto<>(-1,"유효성 검사 실패",errorMessage));
+//		}
 		//return ResponseEntity.ok().body(new CMRespDto<>(1,"유효성 검사 성공",true));
 		boolean status = false;
 		

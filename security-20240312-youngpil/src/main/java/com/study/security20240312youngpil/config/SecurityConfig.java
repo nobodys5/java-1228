@@ -8,10 +8,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.study.security20240312youngpil.service.auth.PrincipalOauth2UserService;
+
+import lombok.RequiredArgsConstructor;
+
 @EnableWebSecurity
 @Configuration						//커스텀해주는것
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-
+	
+	private final PrincipalOauth2UserService principalOauth2UserService;
+	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -32,6 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.loginPage("/auth/signin") // 6) 로그인 페이지 get요청을 통해 접근
 		.loginProcessingUrl("/auth/signin") // 7) 로그인 요청(post)
 		.failureHandler(new AuthFailerHandler())
+		.and()
+		.oauth2Login()
+		.userInfoEndpoint()
+		.userService(principalOauth2UserService)
+		.and()
 		.defaultSuccessUrl("/index");//성공하면 메인페이지로 가라는코드
 	}
 }
