@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.practice2.web0319.web.dto.CMRespDto;
 import com.practice2.web0319.web.dto.PracticeReqDto;
+import com.practice2.web0319.web.dto.PracticeRespDto;
 import com.practice2.web0319.web.service.PracticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,27 +25,29 @@ public class DataController {
 	private final PracticeService practiceService;
 	
 	@PostMapping("/data/{num}")
-	public String data(@PathVariable int num) {
+	public ResponseEntity<?> data(@PathVariable int num) {
 		System.out.println(num);
+		PracticeRespDto practiceRespDto = null;
 		try {
-			practiceService.readdto(num);
+			practiceRespDto = practiceService.readdto(num);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResponseEntity.ok().body(new CMRespDto<>(-1,"실패",practiceRespDto));
+
 		}
-		return "hi";
+		return ResponseEntity.ok().body(new CMRespDto<>(1,"성공",practiceRespDto));
 	}
 	
 	@PostMapping("/datain")
 	public ResponseEntity<?> datain(@RequestBody PracticeReqDto practiceReqDto) {
 		System.out.println(practiceReqDto);
-		boolean result = false;
 		try {
-			result = practiceService.createdto(practiceReqDto);
+			practiceService.createdto(practiceReqDto);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ResponseEntity.ok().body(new CMRespDto<>(-1,"실패",result));
+			return ResponseEntity.ok().body(new CMRespDto<>(-1,"실패",practiceReqDto));
 
 		}
-		return ResponseEntity.ok().body(new CMRespDto<>(1,"성공",result));
+		return ResponseEntity.ok().body(new CMRespDto<>(1,"성공",practiceReqDto));
 	}
 }

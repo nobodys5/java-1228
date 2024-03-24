@@ -3,9 +3,11 @@ package com.practice2.web0319.web.service;
 import org.springframework.stereotype.Service;
 
 
+
 import com.practice2.web0319.domain.practice.Practice;
 import com.practice2.web0319.domain.practice.PracticeRepository;
 import com.practice2.web0319.web.dto.PracticeReqDto;
+import com.practice2.web0319.web.dto.PracticeRespDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,16 +15,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PracticeServiceImpl implements PracticeService {
 
-	private PracticeRepository practiceRepository;
+	private final PracticeRepository practiceRepository;
 	
 	
 	
 	
 	@Override
-	public boolean readdto(int num) throws Exception {
-	Practice practice = practiceRepository.findBoard(num);
-	System.out.println("num:" +num);
-		return false;
+	public PracticeRespDto readdto(int num) throws Exception {
+		System.out.println("num:"+num);
+		Practice practice = practiceRepository.findBoard(num);
+		System.out.println(practice);
+		PracticeRespDto practiceRespDto = practice.toDto();
+		return practiceRespDto;
 	}
 
 
@@ -30,8 +34,9 @@ public class PracticeServiceImpl implements PracticeService {
 
 	@Override
 	public boolean createdto(PracticeReqDto practiceReqDto) throws Exception {
-		 practiceRepository.save(practiceReqDto.toEntity());
-		System.out.println(practiceReqDto);
+		 Practice practice = practiceReqDto.toEntity();
+		int num = practiceRepository.save(practice);
+		System.out.println(practice);
 		return false;
 	}
 

@@ -2,6 +2,8 @@ package com.practice2.web0319.domain.practice;
 
 import java.time.LocalDateTime;
 
+import com.practice2.web0319.web.dto.PracticeRespDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +22,16 @@ public class Practice {
 	private String user_username;
 	private LocalDateTime create_date;
 	private LocalDateTime update_date;
+	
+	public PracticeRespDto toDto() {
+		return PracticeRespDto.builder()
+				.boardId(board_id)
+				.boardTitle(board_content)
+				.boardContent(board_content)
+				.userId(user_id)
+				.userUsername(user_username)
+				.createDate(create_date)
+				.updateDate(update_date)
+				.build();
+	}
 }

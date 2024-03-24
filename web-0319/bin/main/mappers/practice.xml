@@ -20,6 +20,17 @@
 			WHERE
 				board_id = #{num}		
 	  </select>
-	
+	  
+	  <insert id="save" parameterType="com.practice2.web0319.domain.practice.Practice">
+		  	INSERT INTO
+				practice_board
+			VALUES
+				(0,
+				#{board_title},
+				#{board_content},
+				#{user_id},
+				NOW(),
+				NOW())
+	  </insert>
 	  
   </mapper>
