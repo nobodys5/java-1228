@@ -1,6 +1,9 @@
 package com.practice2.web0319.web.controller.api;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,5 +52,18 @@ public class DataController {
 
 		}
 		return ResponseEntity.ok().body(new CMRespDto<>(1,"성공",practiceReqDto));
+	}
+	
+	@GetMapping("/manydata")
+	public ResponseEntity<?> manydata(int page) {
+		List<PracticeRespDto> practiceRespDtos = new ArrayList<PracticeRespDto>();
+		System.out.println(practiceRespDtos);
+		try {
+			practiceRespDtos = practiceService.listdto(page);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.ok().body(new CMRespDto<>(-1,"실패",practiceRespDtos));
+		}
+		return ResponseEntity.ok().body(new CMRespDto<>(1,"성공",practiceRespDtos));
 	}
 }

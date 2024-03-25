@@ -26,7 +26,7 @@ public class Practice {
 	public PracticeRespDto toDto() {
 		return PracticeRespDto.builder()
 				.boardId(board_id)
-				.boardTitle(board_content)
+				.boardTitle(board_title)
 				.boardContent(board_content)
 				.userId(user_id)
 				.userUsername(user_username)

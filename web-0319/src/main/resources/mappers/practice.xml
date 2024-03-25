@@ -33,4 +33,22 @@
 				NOW())
 	  </insert>
 	  
+	  <select id="addlist" parameterType="Integer" resultType="com.practice2.web0319.domain.practice.Practice">
+		  SELECT
+			pb.board_id,
+			pb.board_title,
+			pb.board_content,
+			pb.user_id,
+			pu.user_username,
+			pb.create_date,
+			pb.update_date
+	
+			FROM
+				practice_board pb
+				LEFT OUTER JOIN practice_user pu ON (pb.user_id = pu.user_id)
+			ORDER by
+				create_date	desc
+			limit
+				#{index},5;						
+	  </select>
   </mapper>
