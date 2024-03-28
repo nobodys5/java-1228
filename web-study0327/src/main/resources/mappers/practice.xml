@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.practice2.webstudy0327.domain.practice.PracticeRepository">
+	  
+	 <select id="save" parameterType="Integer" resultType="com.practice2.webstudy0327.domain.practice.Practice">
+		 SELECT
+			pb.board_id,
+			pb.board_title,
+			pb.board_content,
+			pb.user_id,
+			pu.user_username,
+			pb.create_date,
+			pb.update_date
+	
+		FROM
+			practice_board pb
+			LEFT OUTER JOIN practice_user pu ON (pb.user_id = pu.user_id)
+		where
+			board_id = #{num};				
+	 </select> 
+	 
+	 <insert id="insert" parameterMap="com.practice2.webstudy0327.domain.practice.Practice">
+		 
+		 
+	 </insert>
+  </mapper>
