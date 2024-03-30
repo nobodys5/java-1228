@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ppt5-1</title>
+    <style>
+        button{
+            width: 50px;
+            height: 50px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <form action="#">
+        <div>
+            <label for="username">이름</label>
+
+        </div>
+        <div>
+            <input type="text" id="username">
+
+        </div>
+
+        <label for="email">이메일</label>
+        <input type="email" id="email">
+        <div>
+            <input type="checkbox" id="chk-1">
+            <label for="chk1">축구</label>
+        </div>
+        <div>
+            <input type="checkbox" id="chk-2">
+            <label for="chk1">농구</label>
+        </div>
+        <div>
+            <input type="radio" id="rchk-1" name="hobby">
+            <label for="rchk-1">공</label>
+        </div>
+        <div>
+            <input type="radio" id="rchk-2" name="hobby">
+            <label for="rchk-2">놀</label>
+
+        </div>
+        <div>
+            <label for="num">갯수</label>
+            <input type="number" id="num" min="0" max="100" step="2">
+        </div>
+        <div>
+            <label for="sound">음량</label>
+            <input type="range" id="sound" min="10" max="100" step="10">
+        </div>
+        <div>
+            <label for="autofocus">오토포커스</label>
+            <input type="text" autofocus>
+        </div>
+        <div>
+            <label for="placeholder">플레이스홀더확인</label>
+            <input  id="text" placeholder="8~16자리" width="500px" >
+        </div>
+        <div>
+            <label for="readonly">리드온리확인</label>
+            <input type="text" value="gildong" readonly>
+        </div>
+        <div>
+            <label for="required">required확인</label>
+            <input id="required" type="text" required >
+        </div>
+        <button type="submit">입력</button>
+        <div>
+            <label for="select">의류</label>
+            <select name="" id="select">
+
+                <option value="상의">상의</option>
+                <option value="하의">하의</option>
+                <option value="신발" selected>신발</option>
+                <option value="의자">의자</option>
+            </select>
+        </div>
+
+        
+        <div>
+            <label for="select">선택</label>
+            <select name="" id="select">
+
+                <optgroup label="악세">
+                 <option value="악세사리">악세사리</option>
+                 <option value="별거">별거</option>
+                </optgroup>
+                <optgroup label="의상">
+                    <option value="치마">치마</option>
+                    <option value="슈즈">슈즈</option>
+                </optgroup>
+            </select>
+        </div>
+        <div>
+            <input type="text" list="list1">
+            <datalist id="list1">
+                <option value="이름">이름</option>
+                <option value="이름1">이름1</option>
+                <option value="이름2">이름2</option>
+            </datalist>
+        </div>
+        <div>
+            <label for="fileInput">파일선택</label>
+            <input type="file" accept=".jpg">
+        </div>
+    </form>
+</body>
+</html>
