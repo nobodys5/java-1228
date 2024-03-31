@@ -5,8 +5,8 @@
   
   <mapper namespace="com.practice2.webstudy0327.domain.practice.PracticeRepository">
 	  
-	 <select id="save" parameterType="Integer" resultType="com.practice2.webstudy0327.domain.practice.Practice">
-		 SELECT
+	  <select id="userreaddto" parameterType="Integer" resultType="com.practice2.webstudy0327.domain.practice.Practice">
+		  SELECT
 			pb.board_id,
 			pb.board_title,
 			pb.board_content,
@@ -19,11 +19,41 @@
 			practice_board pb
 			LEFT OUTER JOIN practice_user pu ON (pb.user_id = pu.user_id)
 		where
-			board_id = #{num};				
-	 </select> 
-	 
-	 <insert id="insert" parameterMap="com.practice2.webstudy0327.domain.practice.Practice">
-		 
-		 
-	 </insert>
+			board_id = #{num};			
+		  
+		  
+	  </select>
+	  
+	  <insert id="insertdto" parameterType="com.practice2.webstudy0327.domain.practice.Practice">
+		INSERT INTO
+			practice_board
+		VALUES
+			(0,
+			#{board_title},
+			#{board_content},
+			#{user_id},
+			NOW(),
+			NOW());
+	  </insert>
+	  
+	  <select id="readdto" parameterType="Integer" resultType="com.practice2.webstudy0327.domain.practice.Practice">
+		  SELECT
+			pb.board_id,
+			pb.board_title,
+			pb.board_content,
+			pb.user_id,
+			pu.user_username,
+			pb.create_date,
+			pb.update_date
+	
+		FROM
+			practice_board pb
+			LEFT OUTER JOIN practice_user pu ON (pb.user_id = pu.user_id)
+		ORDER by
+		create_date	desc
+		limit
+		#{index},10;
+		  
+	  </select>
+	  
   </mapper>
