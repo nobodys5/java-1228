@@ -1,0 +1,1 @@
+console.log("ppt14-2.js :" + result);

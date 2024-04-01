@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ppt17-2</title>
+    <style>
+        .new-nametag{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-top: 10px;
+            width: 220px;
+            height: 70px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .create-button{
+            width: 220px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <h1>이름표 만들기</h1>
+    
+        <label for="name">이름:</label>
+        <input type="text" id="name" class="name-input">
+    </div>
+    <div>
+        <label for="color">색상:</label>
+        <input type="text" id="color" class="color-input">
+    </div>
+    <button type="button" class="create-button">제작</button>
+
+    <div class="new-nametag"></div>
+    
+    
+    <script src="js/ppt17-2.js"></script>
+</body>
+</html>
